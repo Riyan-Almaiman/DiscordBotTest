@@ -1,4 +1,4 @@
-const getOpenAIResponse = require("../openai");
+const getOpenAIResponse = require("../services/openai");
 
 async function chatCommand(interaction) {
     const userMessage = interaction.options.getString("message");
