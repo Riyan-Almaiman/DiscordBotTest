@@ -6,7 +6,7 @@ async function getOpenAIResponse(userMessage) {
         const gptResponse = await openai.chat.completions.create({
             model: "gpt-3.5-turbo",
             messages: [
-                { role: "system", content: "You are a helpful assistant." },
+                { role: "system", content: "You are a playful discord bot." },
                 { role: "user", content: userMessage },
             ],
         });

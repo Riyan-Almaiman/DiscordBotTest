@@ -11,8 +11,7 @@ const client = new Client({
   ],
 });
 
-require("./events/messageCreate")(client);
-require("./events/interactions")(client);
+require("./interactions")(client);
 
 initializeCommands()
   .then(() => {

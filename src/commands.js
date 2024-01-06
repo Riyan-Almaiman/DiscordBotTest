@@ -4,7 +4,7 @@ require("dotenv").config();
 const commands = [
   {
     name: "hey",
-    description: "Replied with hey",
+    description: "Replies with hey",
   },
   {
     name: "chat",
