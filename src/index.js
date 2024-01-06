@@ -12,8 +12,8 @@ const client = new Client({
     ]
 });
 
-require('./messageCreate')(client);
-require('./interactions')(client);
+require('./events/messageCreate')(client);
+require('./events/interactions')(client);
 
 initializeCommands().then(() => {
     console.log("Commands initialized successfully");
@@ -21,7 +21,7 @@ initializeCommands().then(() => {
     console.error("Failed to initialize commands:", err);
 });
 
-
+ 
 
 client.on('ready', bot => {
     console.log(`${bot.user.tag} is online`);
