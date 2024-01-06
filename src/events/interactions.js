@@ -15,30 +15,21 @@ module.exports = (client) => {
 
     if (interaction.commandName === "chat") {
       const userMessage = interaction.options.getString("message");
-      console.log(userMessage);
+
       try {
         await interaction.deferReply();
+        const replyText = await getOpenAIResponse(userMessage);
 
-        const gptResponse = await openai.chat.completions.create({
-          model: "gpt-3.5-turbo",
-          messages: [
-            { role: "system", content: "You are a helpful assistant." },
-            { role: "user", content: userMessage },
-          ],
-        });
-        console.log(gptResponse.choices[0].message.content);
-        let replyText = gptResponse.choices[0].message.content;
+        const response =
+          replyText.length > 2000
+            ? replyText.substring(0, 1997) + "..."
+            : replyText;
 
-        // Truncate if over 2000 characters
-        if (replyText.length > 2000) {
-          replyText = replyText.substring(0, 1997) + "...";
-        }
-        await interaction.followUp(replyText);
+        await interaction.followUp(response);
+        
       } catch (error) {
-        console.error("Error communicating with OpenAI:", error);
-        await interaction.followUp(
-          "Sorry, I couldn't fetch a response from GPT-3.5."
-        );
+        console.error("Error:", error);
+        await interaction.followUp("Sorry, I couldn't process your request.");
       }
     }
   });
