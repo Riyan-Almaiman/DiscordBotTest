@@ -1,5 +1,5 @@
-const { OpenAI } = require("openai");
-const openai = new OpenAI({ apiKey: process.env.OPENAI });
+const getOpenAIResponse = require("./openai");
+
 
 module.exports = (client) => {
   client.on("interactionCreate", (interaction) => {
@@ -26,7 +26,7 @@ module.exports = (client) => {
             : replyText;
 
         await interaction.followUp(response);
-        
+
       } catch (error) {
         console.error("Error:", error);
         await interaction.followUp("Sorry, I couldn't process your request.");
